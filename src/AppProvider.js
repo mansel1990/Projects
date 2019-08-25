@@ -9,6 +9,7 @@ import {
 export const AppContext = React.createContext();
 
 const THINKING_TIME = 500;
+let logger = [];
 
 class AppProvider extends Component {
 
@@ -22,6 +23,7 @@ class AppProvider extends Component {
             iconType: null,
             isTie: null,
         },
+        stateLog: []
     }
 
     state = {
@@ -30,6 +32,7 @@ class AppProvider extends Component {
         playerTurn: this.initState.playerTurn,
         cells: this.initState.cells,
         gameState: this.initState.gameState,
+        stateLog: [],
 
         /* changeType: (type) => {
             if (this.state.gameType !== type) {
@@ -45,6 +48,7 @@ class AppProvider extends Component {
     }
 
     initNewGame = (type = this.initState.gameType) => {
+        logger = [];
         this.setState(() => {
             return {
                 gameType: 1,
@@ -52,6 +56,7 @@ class AppProvider extends Component {
                 playerTurn: getRandom(0,2),
                 cells: this.initState.cells,
                 gameState: this.initState.gameState,
+                stateLog: []
             }
         }, () => {
             this.initGame();
@@ -67,6 +72,9 @@ class AppProvider extends Component {
 
             this.timeout = setTimeout(() => {
                 const randomMove = findRandomMove(this.state.cells);
+                let compIndex = "Computer Played at index: " + randomMove;
+                console.log(compIndex);
+                logger.push(compIndex);
                 this.computerPlay(randomMove);
             }, THINKING_TIME);
         }
@@ -78,13 +86,13 @@ class AppProvider extends Component {
         const nextPlayerTurn = 1 - prevState.playerTurn;
         const nextCells = replace(cells, index, prevState.currentIcon);
         const gameState = checkGameState(nextCells);
-        console.log("Next state = " + nextIcon);
 
         return {
             gameState: gameState,
             currentIcon: nextIcon,
             playerTurn: nextPlayerTurn,
-            cells: nextCells
+            cells: nextCells,
+            stateLog: logger
         }
     }
 
@@ -92,7 +100,9 @@ class AppProvider extends Component {
         if (this.state.gameState.position === "" && this.state.cells[index] === null &&
             this.state.playerTurn === PLAYER_TURNS.HUMAN) {
 
-            console.log("Human Clicked");
+            let humanIndex = "Human Played at index: " + index;
+            console.log(humanIndex);
+            logger.push(humanIndex);
             this.setState(prevState => {
                 return this.applyState(prevState, index);
             }, () => {
@@ -104,6 +114,7 @@ class AppProvider extends Component {
                     }, THINKING_TIME);
                 }
             });
+            console.log(logger);
         }
     }
 
@@ -111,6 +122,9 @@ class AppProvider extends Component {
         const bestMove = findBestMove(this.state.cells, this.state.currentIcon);
 
         if (bestMove !== null) {
+            let compIndex = "Computer Played at index: " + bestMove;
+            console.log(compIndex);
+            logger.push(compIndex);
             this.computerPlay(bestMove);
         }
     }

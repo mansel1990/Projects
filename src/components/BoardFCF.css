@@ -1,0 +1,102 @@
+.main>.boardfcf {
+    position: relative;
+}
+
+.main>.boardfcf::after {
+    content: '';
+    position: absolute;
+    background-color: #2ab7ca;
+    transition: 0.7s;
+    -webkit-transition: 0.7s;
+    -moz-transition: 0.7s;
+    -o-transition: 0.7s;
+}
+
+.main>.boardfcf>.boardfcf-row {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+}
+  
+.main>.boardfcf>.boardfcf-row>.cell {
+    flex: 1;
+    padding-top: calc(100% / 6 - 2.9rem);
+    padding-bottom: calc(100% / 6 - 2.9rem);
+    font-size: 5rem;
+    line-height: 5.7rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #bab2b5;
+    margin-left: -2px;
+    margin-top: -2px;
+    color: #edc7b7;
+}
+  
+  .main>.boardfcf>.boardfcf-row>.cell.done {
+    color: #fff;
+  }
+  
+  .main>.boardfcf.full>.boardfcf-row>.cell {
+    cursor: default;
+  }
+  
+  .main>.boardfcf:not(.full)>.boardfcf-row>.cell:not(.done):hover {
+    cursor: pointer;
+    background-color: #edc7b7;
+    color: #edc7b7;
+  }
+  
+  .main>.boardfcf>.boardfcf-row>.cell.cell-0,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-1,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-2,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-3,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-4 {
+    border-top: none;
+  }
+  
+  .main>.boardfcf>.boardfcf-row>.cell.cell-0,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-5,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-10,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-15,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-20 {
+    border-left: none;
+  }
+  
+  .main>.boardfcf>.boardfcf-row>.cell.cell-20,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-21,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-22,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-23,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-24 {
+    border-bottom: none;
+  }
+  
+  .main>.boardfcf>.boardfcf-row>.cell.cell-4,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-9,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-14,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-19,
+  .main>.boardfcf>.boardfcf-row>.cell.cell-24 {
+    border-right: none;
+  }
+  
+  @media (max-width: 1400px) {
+    .main {
+      padding: 0px 120px;
+    }
+    .main>.info {
+      padding: 20px 0;
+      font-size: 1.2rem;
+    }
+    .main>.boardfcf>.boardfcf-row>.cell {
+      padding-top: calc(100% / 6 - 1.7rem);
+      padding-bottom: calc(100% / 6 - 1.7rem);
+      font-size: 3rem;
+      line-height: 3.3rem;
+    }
+  }
+  
+  @media (max-width: 575px) {
+    .main {
+      padding: 0px 50px;
+    }
+  }
